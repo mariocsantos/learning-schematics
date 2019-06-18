@@ -33,7 +33,7 @@ function renderTemplate(_options: Schema, _config: any) {
     template({
       ..._options,
       ...strings,
-      ...{ _config },
+      ...{ _config, size: 600 },
       upperWithUderscore,
       findSharedModule
     })
