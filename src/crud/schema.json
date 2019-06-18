@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "CrudSchematics",
+    "title": "Let's do cruds easily",
+    "type": "object",
+    "description": "Make cruds easily",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the person",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-prompt": "Escreva o nome do crud?"
+        },
+        "route": {
+            "type": "string",
+            "description": "The name of the person",
+            "$default": {
+                "$source": "argv",
+                "index": 1
+            }
+        },
+        "convertion": {
+            "type": "boolean",
+            "description": "The name of the person",
+            "$default": {
+                "$source": "argv",
+                "index": 2
+            }
+        }
+    },
+    "required": [
+        "name"
+    ]
+}

@@ -1,0 +1,45 @@
+@import '~ng-smn-ui/lib/core/variables';
+
+:host {
+    ui-card {
+        position: relative;
+        z-index: 2;
+
+        /deep/ {
+            ui-toolbar {
+                .title {
+                    transition: opacity 280ms ui-easing('deceleration'),
+                    transform 280ms ui-easing('deceleration');
+
+                    &.hide {
+                        opacity: 0;
+                        transform: translateY(-20px);
+                    }
+                }
+
+                header {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+        .ui-progress {
+            position: absolute;
+            transition: height 280ms ui-easing('deceleration');
+            height: 0;
+        }
+
+        &.loading {
+            .ui-progress {
+                height: 4px;
+            }
+        }
+
+        .secondary-text {
+            cursor: default;
+            user-select: none;
+            font-size: 12px;
+        }
+    }
+}

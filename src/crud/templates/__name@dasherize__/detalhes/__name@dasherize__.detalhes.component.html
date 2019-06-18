@@ -1,0 +1,90 @@
+<div class="ui-s480">
+    <form #statusNegocioForm="ngForm" class="ui-validate on-dirty on-submit" (submit)="confirmar(statusNegocioForm)">
+        <ui-card [class.loading]="loading">
+            <div class="ui-progress primary" [class.hide]="!loading">
+                <div class="indeterminate"></div>
+            </div>
+
+            <ui-toolbar class="flat">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <button class="ui-button icon flat" type="button" uiRipple [routerLink]="['..']">
+                        <i class="material-icons">arrow_back</i>
+                    </button>
+
+                    <span class="title">{{newRegister ? 'Status negócio' : (loading ? 'Carregando' : 'Alterando ' + (info.nome || ''))}}</span>
+                </div>
+            </ui-toolbar>
+
+            <ui-card-content>
+                <fieldset [disabled]="saving || loading">
+                    <div class="ui-flex-container">
+                        <ui-input-container>
+                            <input type="text"
+                                   uiInput
+                                   #nome="ngModel"
+                                   id="nome-status-negocio"
+                                   name="nome"
+                                   required
+                                   uiMaxlength="50"
+                                   [(ngModel)]="info.nome">
+                            <label>Nome</label>
+                            <div class="ui-messages">
+                                <div *ngIf="nome.errors && nome.dirty">
+                                    <div class="ui-message error" [hidden]="!nome.pristine && !nome.errors.required">
+                                        Nome obrigatório
+                                    </div>
+                                    <div class="ui-message error" [hidden]="!nome.errors.uiMaxlength">
+                                        Quantidade de caracteres excedida {{info.nome ? info.nome.length : 0}}/50
+                                    </div>
+                                </div>
+                            </div>
+                        </ui-input-container>
+
+                        <ui-input-container style="max-width: 35px">
+                            <input type="text"
+                                   name="cor"
+                                   [(ngModel)]="info.cor"
+                                   #cor
+                                   uiInput
+                                   uiColorPicker
+                                   required>
+                            <label>Cor</label>
+                            <div class="ui-messages">
+                                <div *ngIf="cor.errors && cor.dirty">
+                                    <div class="ui-message error" [hidden]="!cor.pristine && !cor.errors.required">
+                                        Cor obrigatória
+                                    </div>
+                                </div>
+                            </div>
+                        </ui-input-container>
+                    </div>
+                </fieldset>
+
+                <div class="secondary-text" *ngIf="info.nomeUsuarioCadastro">
+                    <div>
+                        Cadastrado por {{info.nomeUsuarioCadastro}}
+                        em {{info.dataCadastro | date : "dd/MM/yyyy 'às' HH:mm"}}
+                    </div>
+                    <div *ngIf="info.nomeUsuarioAlteracao">
+                        Alterado por {{info.nomeUsuarioAlteracao}}
+                        em {{info.dataAlteracao | date : "dd/MM/yyyy 'às' HH:mm"}}
+                    </div>
+                </div>
+            </ui-card-content>
+        </ui-card>
+
+        <div class="ui-fab-container">
+            <button class="ui-button fab success"
+                    uiRipple
+                    title="Confirmar cadastro"
+                    [class.hide]="loading">
+                <ui-progress-radial class="indeterminate" *ngIf="saving"></ui-progress-radial>
+                <i class="material-icons">done</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
